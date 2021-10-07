@@ -5,6 +5,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Exercici MVC amb JSP i BBDD de Xavier Vergés</h1>
+        <a href="resources/saludo">Hola mundo</a>
+        
+        <h2>Dades Personals</h2>
+        <form action="resources/saludo/persona-direccion" method="post">
+            Nom: <input type="text" name="nombre" placeholder="Escriu el teu nom aquí"/><br/>
+            Cognoms: <input type="text" name="apellidos" placeholder="Escriu els teus cognoms aquí"/><br/>
+            Dni: <input type="text" name="dni" placeholder="Escriu el teu DNI aquí"/><br/>
+            
+            <button type="submit">Guardar</button>
+        </form>
     </body>
 </html>

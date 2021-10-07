@@ -21,9 +21,9 @@ import java.util.logging.Logger;
 public abstract class BaseDao<T, S> {
 
     private final static String CONNECTIONSTRING
-            = "jdbc:mysql://ba60efaf494dd2:e757a8f8@eu-cdbr-west-01.cleardb.com/heroku_c2a7aa794927668?reconnect=true";
-    private final static String USER = "ba60efaf494dd2";
-    private final static String PWD = "e757a8f8";
+            = "jdbc:mysql://bdcda050e4ec71:65ba3f34@eu-cdbr-west-01.cleardb.com/heroku_66f4946ce42c988?reconnect=true&useSSL=false";
+    private final static String USER = "bdcda050e4ec71";
+    private final static String PWD = "65ba3f34";
 
     private static final Logger LOG = Logger.getLogger(BaseDao.class.getName());
 
