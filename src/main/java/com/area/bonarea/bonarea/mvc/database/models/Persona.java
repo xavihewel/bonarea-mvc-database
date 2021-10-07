@@ -13,11 +13,24 @@ import javax.ws.rs.FormParam;
  */
 public class Persona {
 
+    private long id;
+
     @FormParam("nombre")
     private String nombre;
 
     @FormParam("apellidos")
-    private String Apellidos;
+    private String apellidos;
+
+    @FormParam("dni")
+    private String dni;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -28,10 +41,18 @@ public class Persona {
     }
 
     public String getApellidos() {
-        return Apellidos;
+        return apellidos;
     }
 
-    public void setApellidos(String Apellidos) {
-        this.Apellidos = Apellidos;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 }
