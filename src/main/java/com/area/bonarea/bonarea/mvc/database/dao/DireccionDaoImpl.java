@@ -6,9 +6,10 @@
 package com.area.bonarea.bonarea.mvc.database.dao;
 
 import com.area.bonarea.bonarea.mvc.database.models.Direccion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import javax.enterprise.context.Dependent;
 
 /**
@@ -16,27 +17,52 @@ import javax.enterprise.context.Dependent;
  * @author xavier.verges
  */
 @Dependent
-public class DireccionDaoImpl extends BaseDao<Direccion> implements DireccionDao {
+public class DireccionDaoImpl extends BaseDao<Direccion, Long> implements DireccionDao {
 
     private static final String TABLE = "direccion_verges";
-    private static final String SQL_GETBYID = "SELECT * FROM " + TABLE
-            + "WHERE ID=?";
-        private static final String SQL_ADD = "INSERT INTO " + TABLE
+    private static final String KEY_NAME = "id";
+    private static final String INSERT_STATEMENT = "INSERT INTO " + TABLE
             + "(calle, poblacion, provincia) VALUES(?,?,?)";
-    
+
     @Override
     protected Direccion getFromResultSet(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Direccion direccion = new Direccion();
+        direccion.setId(rs.getLong("id"));
+        direccion.setCalle(rs.getString("calle"));
+        direccion.setPoblacion(rs.getString("poblacion"));
+        direccion.setProvincia(rs.getString("provincia"));
+        return direccion;
     }
-
-    @Override
-    public Direccion getById(Long direccionId) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 
     @Override
     public Direccion add(Direccion direccion) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        long generatedKey = 0;
+        try ( Connection con = this.getConnection();  PreparedStatement preparedInsert = con.prepareStatement(INSERT_STATEMENT,
+                PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+            preparedInsert.setString(1, direccion.getCalle());
+            preparedInsert.setString(2, direccion.getPoblacion());
+            preparedInsert.setString(3, direccion.getProvincia());
+
+            preparedInsert.executeUpdate();
+            try ( ResultSet resultset = preparedInsert.getGeneratedKeys()) {
+                while (resultset.next()) {
+                    generatedKey = resultset.getLong(1);
+                    direccion.setId(generatedKey);
+                    System.out.println("Clave generada = " + generatedKey);
+                }
+            }
+        }
+        return this.getById(generatedKey);
+    }
+
+    @Override
+    protected String getTableName() {
+        return TABLE;
+    }
+
+    @Override
+    protected String getKeyName() {
+        return KEY_NAME;
     }
 }

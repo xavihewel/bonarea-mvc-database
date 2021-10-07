@@ -13,6 +13,8 @@ import javax.ws.rs.FormParam;
  */
 public class Direccion {
 
+    private long id;
+
     @FormParam("calle")
     private String calle;
 
@@ -21,6 +23,14 @@ public class Direccion {
 
     @FormParam("provincia")
     private String provincia;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getCalle() {
         return calle;
