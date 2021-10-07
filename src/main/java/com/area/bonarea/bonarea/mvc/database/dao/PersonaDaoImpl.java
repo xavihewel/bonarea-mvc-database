@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 
 /**
  *
@@ -22,7 +23,10 @@ public class PersonaDaoImpl extends BaseDao<Persona, Long> implements PersonaDao
     private static final String TABLE = "persona_verges";
     private static final String KEY_NAME = "id";
     private static final String INSERT_STATEMENT = "INSERT INTO " + TABLE
-            + "(nombre, apellidos, dni) VALUES(?,?,?)";
+            + "(nombre, apellidos, dni, FK_direccion_persona) VALUES(?,?,?,?)";
+    
+    @Inject
+    private DireccionDao direccionDao;
 
     @Override
     protected Persona getFromResultSet(ResultSet rs) throws SQLException {
@@ -31,6 +35,7 @@ public class PersonaDaoImpl extends BaseDao<Persona, Long> implements PersonaDao
         persona.setNombre(rs.getString("nombre"));
         persona.setApellidos(rs.getString("apellidos"));
         persona.setDni(rs.getString("dni"));
+        persona.setDireccion(direccionDao.getById(rs.getLong("FK_direccion_persona")));
         return persona;
     }
 
@@ -43,7 +48,9 @@ public class PersonaDaoImpl extends BaseDao<Persona, Long> implements PersonaDao
             preparedInsert.setString(1, persona.getNombre());
             preparedInsert.setString(2, persona.getApellidos());
             preparedInsert.setString(3, persona.getDni());
-
+            
+            preparedInsert.setLong(4, this.direccionDao.add(persona.getDireccion()).getId());
+                
             preparedInsert.executeUpdate();
             try ( ResultSet resultset = preparedInsert.getGeneratedKeys()) {
                 while (resultset.next()) {
