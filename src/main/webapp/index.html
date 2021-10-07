@@ -2,19 +2,37 @@
 <html>
     <head>
         <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
+        <!-- Insertamos el archivo CSS compilado y comprimido -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <!-- Theme opcional -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     </head>
     <body>
-        <h1>Exercici MVC amb JSP i BBDD de Xavier Vergés</h1>
-        <a href="resources/saludo">Hola mundo</a>
-        
-        <h2>Dades Personals</h2>
-        <form action="resources/saludo/persona-direccion" method="post">
-            Nom: <input type="text" name="nombre" placeholder="Escriu el teu nom aquí"/><br/>
-            Cognoms: <input type="text" name="apellidos" placeholder="Escriu els teus cognoms aquí"/><br/>
-            Dni: <input type="text" name="dni" placeholder="Escriu el teu DNI aquí"/><br/>
-            
-            <button type="submit">Guardar</button>
-        </form>
+        <div class="container">
+            <header class="page-header">
+                <ul class="nav nav-pills pull-right">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="resources/saludo">Saludo</a></li>
+                    <li><a href="#">Experiencia</a></li>
+                </ul>
+            </header>
+            <div class="jumbotron">
+                <h1>Exercici MVC amb JSP i BBDD de Xavier Vergés</h1>
+
+                <h2>Dades Personals</h2>
+                <form action="resources/saludo-persona-direccion" method="post">
+                    Nom: <input type="text" name="nombre" placeholder="Escriu el teu nom aquí"/><br/>
+                    Cognoms: <input type="text" name="apellidos" placeholder="Escriu els teus cognoms aquí"/><br/>
+                    Dni: <input type="text" name="dni" placeholder="Escriu el teu DNI aquí"/><br/>
+
+                    Carrer: <input type="text" name="calle" placeholder="Escriu el teu carrer aquí"/><br/>
+                    Població: <input type="text" name="poblacion" placeholder="Escriu la teva població aquí"/><br/>
+                    Provincia: <input type="text" name="provincia" placeholder="Escriu la teva provincia aquí"/><br/>
+
+                    <button type="submit">Guardar</button>
+                </form>
+            </div>
+        </div>
     </body>
 </html>

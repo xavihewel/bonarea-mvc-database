@@ -13,6 +13,8 @@ import javax.ws.rs.FormParam;
  */
 public class Persona {
 
+    private Direccion direccion;
+
     private long id;
 
     @FormParam("nombre")
@@ -54,5 +56,13 @@ public class Persona {
 
     public void setDni(String dni) {
         this.dni = dni;
+    }
+
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
     }
 }
